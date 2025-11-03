@@ -20,6 +20,44 @@ Uma plataforma que empodera donos de restaurantes a:
 - Identificar padroes: horarios de pico, produtos campeoes, clientes inativos
 - Tomar decisoes baseadas em dados com dashboard visual e intuitivo
 
+## Funcionalidades Principais
+
+### Dashboard Interativo
+- Métricas em tempo real de vendas, faturamento e ticket médio
+- Gráficos visuais com top 10 produtos
+- Tabelas interativas de performance por loja
+- Atualização automática dos dados
+
+### Filtros Dinâmicos (FEATURE DIFERENCIAL)
+
+Maria pode explorar dados sem limites:
+
+- **Por Loja**: Seleciona uma loja específica e vê apenas seus dados
+- **Por Canal**: Compara performance entre iFood, Rappi, Balcão, WhatsApp, App próprio
+- **Por Período**: Análisa últimos 7, 30, 90 dias ou todo período disponível
+- **Dashboard Reativo**: Atualiza automaticamente com dados filtrados
+
+Exemplo: Maria quer saber qual foi seu faturamento no iFood nos últimos 30 dias. Ela seleciona iFood, Últimos 30 dias e clica Aplicar Filtros. Dashboard mostra APENAS iFood dos últimos 30 dias - tudo sem escrever código!
+
+### Insights Acionáveis
+
+Não apenas mostra números, mas identifica automaticamente:
+
+- **Loja Destaque**: Qual loja tem melhor performance (com motivo)
+- **Atenção Necessária**: Quais lojas estão abaixo da média
+- **Produto Campeão**: Qual produto gera mais receita
+- **Ticket Médio**: Se está saudável comparado com o mercado
+
+Cada insight tem uma ação sugerida para Maria tomar.
+
+### Query Builder Flexível
+
+Para análises avançadas, Maria pode usar o Query Builder backend:
+- Filtra por qualquer combinação de dimensões
+- Ordena por qualquer métrica
+- Combina múltiplas condições
+- Tudo com segurança total (prepared statements + whitelist)
+
 ## Arquitetura Tecnica
 
 Sistema full-stack com separacao clara de responsabilidades:
