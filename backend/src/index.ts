@@ -2,6 +2,8 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import pool from './config/database';
+import metricsRoutes from './routes/metricsRoutes';
+
 
 dotenv.config();
 
@@ -11,6 +13,9 @@ const PORT = process.env.PORT || 3001;
 // Middlewares
 app.use(cors());
 app.use(express.json());
+// Routes
+app.use('/api', metricsRoutes);
+
 
 // Health check route
 app.get('/health', async (req: Request, res: Response) => {
