@@ -5,6 +5,8 @@ import StoreTable from './components/StoreTable';
 import { getMetrics, getTopProducts, getStorePerformance } from './services/api';
 import type { Metrics, TopProduct, StorePerformance } from './types';
 import './App.css';
+import InsightsCards from './components/InsightsCards';
+
 
 function App() {
   const [metrics, setMetrics] = useState<Metrics | null>(null);
@@ -52,12 +54,56 @@ function App() {
         <p>Real-time sales insights and performance metrics</p>
       </header>
 
+
+      <div style={{ 
+        maxWidth: '1400px', 
+        margin: '0 auto', 
+        padding: '1rem 2rem 0',
+        display: 'flex',
+        justifyContent: 'flex-end',
+        gap: '1rem'
+      }}>
+        <button 
+          onClick={() => window.location.reload()}
+          disabled={loading}
+          style={{
+            padding: '0.75rem 1.5rem',
+            backgroundColor: '#3b82f6',
+            color: 'white',
+            border: 'none',
+            borderRadius: '8px',
+            fontSize: '0.95rem',
+            fontWeight: '500',
+            cursor: loading ? 'not-allowed' : 'pointer',
+            opacity: loading ? 0.6 : 1,
+            transition: 'all 0.2s',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem'
+          }}
+          onMouseEnter={(e) => !loading && (e.currentTarget.style.backgroundColor = '#2563eb')}
+          onMouseLeave={(e) => !loading && (e.currentTarget.style.backgroundColor = '#3b82f6')}
+        >
+          🔄 {loading ? 'Atualizando...' : 'Atualizar Dados'}
+        </button>
+      </div>
+
+
+
       <main className="app-main">
         <MetricsCards metrics={metrics} loading={loading} />
-        
-        {!loading && products.length > 0 && (
-          <TopProductsChart products={products} />
+  
+        {!loading && stores.length > 0 && (
+          <InsightsCards 
+            metrics={metrics} 
+            stores={stores} 
+            products={products}
+          />
         )}
+  
+  {!loading && products.length > 0 && (
+    <TopProductsChart products={products} />
+  )}
 
         {!loading && stores.length > 0 && (
           <StoreTable stores={stores} />
