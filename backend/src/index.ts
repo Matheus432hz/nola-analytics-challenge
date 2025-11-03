@@ -3,6 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import pool from './config/database';
 import metricsRoutes from './routes/metricsRoutes';
+import queryRoutes from './routes/queryRoutes';
+
 
 
 dotenv.config();
@@ -15,6 +17,8 @@ app.use(cors());
 app.use(express.json());
 // Routes
 app.use('/api', metricsRoutes);
+app.use('/api', queryRoutes);
+
 
 
 // Health check route
