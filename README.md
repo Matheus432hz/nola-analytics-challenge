@@ -411,6 +411,85 @@ Nao Permitido:
 - Uso comercial sem autorizacao
 - Redistribuicao sem creditos
 
+## Roadmap - Proximas Iteracoes
+
+Funcionalidades planejadas para evolucao do produto:
+
+### Features de Usuario
+- Export de relatorios CSV/PDF
+- Filtros de data range interativos no dashboard
+- Comparacao temporal (mes a mes, ano a ano)
+- Busca e filtros avancados em produtos/lojas
+- Alertas automaticos para metricas criticas
+- Dashboard customizavel drag-and-drop
+
+### Melhorias Tecnicas
+- Cache Redis para queries frequentes
+- Testes automatizados (Jest/Vitest)
+- CI/CD pipeline
+- Monitoramento e logs estruturados
+- Rate limiting e autenticacao JWT
+
+### Escalabilidade
+- Particao de dados por periodo
+- Read replicas para analytics
+- Message queue para processamento assincrono
+
+## Decisoes Arquiteturais
+
+### Por que Query Builder Dinamico?
+
+Em vez de criar dezenas de endpoints fixos, optamos por um unico endpoint flexivel que permite ao usuario construir qualquer query necessaria.
+
+Beneficios:
+- Autonomia total sem necessidade de deploy
+- Reduz drasticamente tempo de desenvolvimento
+- Escala infinitamente em complexidade de analises
+- Usuario nao fica limitado a visoes pre-definidas
+
+Trade-off aceito:
+- Requer validacao rigorosa de seguranca
+- Solucao: whitelist de tabelas + prepared statements + validacao de operadores
+
+### Por que Monolito ao inves de Microservicos?
+
+Para MVP e prova de conceito, arquitetura monolitica e mais adequada:
+
+Vantagens:
+- Deploy simplificado
+- Desenvolvimento mais rapido
+- Debugging facilitado
+- Overhead operacional minimo
+
+Evolucao futura:
+- Backend stateless permite escalar horizontalmente
+- Separacao frontend/backend ja preparada para evolucao
+- Quando necessario, pode-se extrair servicos especificos (ex: servico de export)
+
+### Por que nao Cache implementado?
+
+Decisao consciente baseada em premissas atuais:
+
+Situacao atual:
+- Queries otimizadas com indices (< 1s para 500k registros)
+- PostgreSQL performatico para esta escala
+- Query builder permite flexibilidade total
+
+Quando implementar:
+- Base crescer para milhoes de registros
+- Queries especificas executadas com alta frequencia
+- Necessidade de SLA < 100ms
+
+Solucao planejada:
+- Redis para queries frequentes e dashboards fixos
+- Invalidacao inteligente baseada em tempo + eventos
+
+### Dados Sinteticos
+
+Os dados apresentados foram gerados utilizando a biblioteca Faker para demonstracao da plataforma. Em producao, os dados viriam diretamente das integracao com APIs dos canais de venda (iFood, Rappi, sistema POS da loja, WhatsApp Business API, etc).
+
+
+
 ## Agradecimentos
 
 - Equipe Nola pela oportunidade e desafio incrivel
