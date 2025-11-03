@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import pool from './config/database';
 import metricsRoutes from './routes/metricsRoutes';
 import queryRoutes from './routes/queryRoutes';
-
+import analysisRoutes from './routes/analysisRoutes';
 
 
 dotenv.config();
@@ -18,7 +18,7 @@ app.use(express.json());
 // Routes
 app.use('/api', metricsRoutes);
 app.use('/api', queryRoutes);
-
+app.use('/api', analysisRoutes);
 
 
 // Health check route
