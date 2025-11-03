@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { getGeneralMetrics } from '../services/metricsService';
 
+
 export const getMetrics = async (req: Request, res: Response) => {
   try {
     const metrics = await getGeneralMetrics();
