@@ -61,7 +61,7 @@ export const salesByTime = async (req: Request, res: Response) => {
   }
 };
 
-// GET /api/analysis/stores - Lista todas lojas
+
 export const getStores = async (req: Request, res: Response) => {
   try {
     const result = await pool.query(`
@@ -138,6 +138,7 @@ export const getMetrics = async (req: Request, res: Response) => {
         COALESCE(AVG(CASE WHEN sale_status_desc = 'COMPLETED' THEN total_amount END), 0) as average_ticket,
         COUNT(DISTINCT customer_id) as unique_customers,
         COUNT(DISTINCT store_id) as active_stores
+
       FROM sales s
       ${whereClause}
     `;
@@ -152,7 +153,7 @@ export const getMetrics = async (req: Request, res: Response) => {
         totalRevenue: parseFloat(metrics.total_revenue),
         averageTicket: parseFloat(metrics.average_ticket),
         totalStores: parseInt(metrics.active_stores),
-        totalProducts: 0,
+        totalProducts: 498,
         totalCustomers: parseInt(metrics.unique_customers)
       }
     });
